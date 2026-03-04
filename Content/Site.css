@@ -1,0 +1,42 @@
+﻿:root {
+    --pink-primary: #C2185B;
+    --pink-dark: #880E4F;
+    --pink-light: #FFF0F6;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    color: #1A1A2E;
+    background: #FFFFFF;
+}
+
+/* Navbar active link */
+.navbar-nav .nav-link.active,
+.navbar-nav .nav-link:hover {
+    color: #FCE4EC !important;
+    font-weight: 600;
+}
+
+/* Cards */
+.card {
+    border-radius: 12px !important;
+}
+
+/* Buttons */
+.btn-glow {
+    background: var(--pink-primary);
+    color: white;
+    border-radius: 8px;
+    transition: background .2s, transform .1s;
+}
+
+    .btn-glow:hover {
+        background: var(--pink-dark);
+        transform: translateY(-2px);
+    }
+
+/* Form controls focus */
+.form-control:focus, .form-select:focus {
+    border-color: var(--pink-primary);
+    box-shadow: 0 0 0 .2rem rgba(194,24,91,.2);
+}

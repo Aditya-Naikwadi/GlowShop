@@ -1,0 +1,139 @@
+﻿@model GlowShop.Models.RegisterViewModel
+@{ 
+    ViewBag.Title = "Create Account"; 
+}
+
+<div class="auth-page py-5 d-flex align-items-center" style="min-height: 80vh;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-5">
+                <div class="card glass-card border-0 rounded-4 shadow-lg overflow-hidden">
+                    <div class="card-header bg-transparent border-0 pt-5 pb-0 text-center">
+                        <div class="auth-icon mb-3 mx-auto">
+                            <i class="fas fa-user-plus theme-text"></i>
+                        </div>
+                        <h2 class="fw-bold section-title mb-1" style="color:#1a0512;">Join GlowShop</h2>
+                        <p class="text-muted small">Start your personalized beauty journey today</p>
+                    </div>
+                    <div class="card-body p-5 pt-4">
+                        @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "premium-form" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true, "", new { @class = "alert alert-danger rounded-3 p-2 small" })
+
+                            <div class="row g-3">
+                                <div class="col-6">
+                                    <div class="form-floating mb-3">
+                                        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control custom-input", placeholder = "First Name" })
+                                        @Html.LabelFor(m => m.FirstName, new { @class = "text-muted small" })
+                                        @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger smaller" })
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-floating mb-3">
+                                        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control custom-input", placeholder = "Last Name" })
+                                        @Html.LabelFor(m => m.LastName, new { @class = "text-muted small" })
+                                        @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger smaller" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control custom-input", placeholder = "name@example.com" })
+                                @Html.LabelFor(m => m.Email, new { @class = "text-muted small" })
+                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger smaller" })
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control custom-input", placeholder = "Password" })
+                                @Html.LabelFor(m => m.Password, new { @class = "text-muted small" })
+                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger smaller" })
+                            </div>
+
+                            <div class="form-floating mb-4">
+                                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control custom-input", placeholder = "Confirm Password" })
+                                @Html.LabelFor(m => m.ConfirmPassword, new { @class = "text-muted small" })
+                                @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger smaller" })
+                            </div>
+
+                            <button type="submit" class="btn btn-premium w-100 py-3 fw-bold mb-3">
+                                CREATE ACCOUNT <i class="fas fa-check-circle ms-2"></i>
+                            </button>
+                        }
+
+                        <p class="text-center mt-4 mb-0 text-muted small">
+                            Already have an account? 
+                            <a href="@Url.Action("Login")" class="theme-text text-decoration-none fw-bold">Sign in</a>
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-4">
+                    <a href="@Url.Action("Index", "Home")" class="text-decoration-none text-muted small">
+                        <i class="fas fa-long-arrow-alt-left me-1"></i> Back to Home
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .section-title {
+        font-family: 'Playfair Display', serif;
+    }
+
+    .theme-text {
+        color: #C2185B;
+    }
+
+    .glass-card {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .auth-icon {
+        width: 60px;
+        height: 60px;
+        background: rgba(194, 24, 91, 0.1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+    }
+
+    .custom-input {
+        border: 1px solid #eee;
+        border-radius: 12px !important;
+        background-color: #fcfcfc !important;
+    }
+
+    .custom-input:focus {
+        border-color: #C2185B;
+        box-shadow: 0 0 0 0.25rem rgba(194, 24, 91, 0.1);
+        background-color: #fff !important;
+    }
+
+    .btn-premium {
+        background: linear-gradient(45deg, #880E4F, #C2185B);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+        letter-spacing: 1px;
+    }
+
+    .btn-premium:hover {
+        background: linear-gradient(45deg, #C2185B, #880E4F);
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(194, 24, 91, 0.4);
+    }
+
+    .smaller {
+        font-size: 0.75rem;
+    }
+</style>

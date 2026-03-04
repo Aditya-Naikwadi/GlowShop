@@ -1,0 +1,134 @@
+﻿@using System.Web.Optimization
+@using System.Web.Mvc
+@using System.Web.Mvc.Html
+@inherits System.Web.Mvc.WebViewPage
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title - GlowShop 🌸</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        body { font-family: 'Montserrat', sans-serif; background-color: #fffafb; }
+        h1, h2, h3, .navbar-brand { font-family: 'Playfair Display', serif; }
+        .glass-nav {
+            background: rgba(136, 14, 79, 0.85) !important;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .nav-link { font-weight: 600; transition: color 0.3s; }
+        .nav-link:hover { color: #ff80ab !important; }
+        .footer-premium { background: #4a0d2c; color: #ffcdd2; }
+    </style>
+    @Styles.Render("~/Content/css")
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top glass-nav">
+        <div class="container">
+            <a class="navbar-brand fw-bold fs-3" href="@Url.Action("Index","Home")">
+                🌸 GlowShop
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navMenu">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link px-3" href="@Url.Action("Index","Home")">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3" href="@Url.Action("Index","Products")">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3" href="@Url.Action("About","Home")">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3" href="@Url.Action("Contact","Home")">Contact</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav align-items-center">
+                    @if (Request.IsAuthenticated)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Profile","Account")">
+                                <i class="fa fa-user-circle fs-5"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item ms-lg-3">
+                            @using (Html.BeginForm("Logout", "Account", FormMethod.Post,
+                                    new { @class = "d-inline" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-outline-light btn-sm rounded-pill px-3">
+                                    Logout
+                                </button>
+                            }
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Login","Account")">Login</a>
+                        </li>
+                        <li class="nav-item ms-lg-3">
+                            <a class="btn btn-light btn-sm rounded-pill px-4 fw-bold"
+                               style="color:#880E4F;"
+                               href="@Url.Action("Register","Account")">Sign Up</a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- FLASH MESSAGE -->
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show m-0 rounded-0 border-0 shadow-sm" 
+             style="background:#e8f5e9; color:#2e7d32;">
+            <div class="container">
+                <i class="fa fa-check-circle me-2"></i> @TempData["Success"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        </div>
+    }
+
+    <!-- PAGE CONTENT -->
+    <main>@RenderBody()</main>
+
+    <!-- FOOTER -->
+    <footer class="footer-premium py-5 mt-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start">
+                    <h4 class="fw-bold">🌸 GlowShop</h4>
+                    <p class="mb-0 opacity-75">Your ultimate beauty destination for premium skincare and makeup.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end mt-4 mt-md-0">
+                    <div class="mb-3">
+                        <a href="#" class="text-white me-3 fs-5"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white me-3 fs-5"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-white fs-5"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                    <small class="opacity-50">© @DateTime.Now.Year GlowShop. Crafted with love. ✨</small>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
